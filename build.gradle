@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral() // Để tải các thư viện Selenium và TestNG
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+dependencies {
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+    implementation "org.testng:testng:${testngVersion}"
+    testImplementation "org.aspectj:aspectjweaver:${aspectjVersion}"
+    implementation "org.slf4j:slf4j-simple:${slf4jVersion}"
+    implementation "commons-io:commons-io:${commonsIoVersion}"
+    implementation "io.qameta.allure:allure-testng:${allureVersion}"
+    implementation "io.qameta.allure:allure-attachments:${allureVersion}"
+    implementation 'io.appium:java-client:10.0.0'
+}
+
+tasks.test {
+    useTestNG(){
+        suites('src/test/resources/testNG.xml')
+        outputDirectory = file("$projectDir/allure-results")
+    }
+    testLogging {
+        showStandardStreams = true
+    }
+}
