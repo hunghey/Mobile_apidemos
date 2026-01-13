@@ -50,28 +50,12 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(getByLocator(locator)));
     }
 
+    protected WebElement waitClickable(String locator, String restParameter) {
+        return wait.until(ExpectedConditions.elementToBeClickable(getByLocator(castParameter(locator, restParameter))));
+    }
+
     protected boolean waitInvisible(String locator) {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(locator)));
-    }
-
-    protected Alert waitAlertPresence(WebDriver driver) {
-        return new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.alertIsPresent());
-    }
-
-    protected void acceptToAlert(WebDriver driver) {
-        waitAlertPresence(driver).accept();
-    }
-
-    protected void cancelToAlert(WebDriver driver) {
-        waitAlertPresence(driver).dismiss();
-    }
-
-    protected String getAlertText(WebDriver driver) {
-        return waitAlertPresence(driver).getText();
-    }
-
-    protected void sendkeyToAlert(WebDriver driver, String keysToSend) {
-        waitAlertPresence(driver).sendKeys(keysToSend);
     }
 
     protected WebElement getElement(String locator) {
@@ -107,11 +91,12 @@ public class BasePage {
     }
 
     protected void clickToElement(String locator) {
+        waitClickable(locator);
         getElement(locator).click();
     }
 
     protected void clickToElement(String locator, String restParameter) {
-//        waitForElementClickable(driver, locator, restParameter);
+        waitClickable(locator, restParameter);
         getElement(castParameter(locator, restParameter)).click();
     }
 

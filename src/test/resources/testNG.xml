@@ -7,7 +7,7 @@
 
         <classes>
 
-            <class name="com.orangehrm.TC_01_AddtoCart"/>
+            <class name="com.orangehrm.AlertDialog"/>
         </classes>
     </test>
 </suite>

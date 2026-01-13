@@ -12,4 +12,8 @@ public class PageGenerator {
         return new AppPage(driver);
     }
 
+    public static AlertDetailsPage getAlertPageDetails(AndroidDriver driver){
+        return new AlertDetailsPage(driver);
+    }
+
 }
