@@ -32,11 +32,11 @@ public class BaseTest {
     @BeforeMethod
     public void beforeMethod(@Optional("chrome") String browserName,
                              @Optional("https://demo.nopcommerce.com") String url) {
-        // Initialize WebDriver
-        driver = getWebdriver(browserName,"https://demo.hyva.io/", true);
-        driver.manage().window().maximize();
-
-        // Initialize ScreenshotHelper
+//        // Initialize WebDriver
+//        driver = getWebdriver(browserName,"https://demo.hyva.io/", true);
+//        driver.manage().window().maximize();
+//
+//        // Initialize ScreenshotHelper
     }
 
     @AfterMethod
@@ -64,131 +64,5 @@ public class BaseTest {
             chromePrefs.put("download.directory_upgrade", true);
             options.setExperimentalOption("prefs", chromePrefs);
         }
-    }
-
-    protected WebDriver getWebdriver(String browserName, String url, boolean headless) {
-        BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
-        switch (browserList) {
-            case FIREFOX:
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                if (headless) {
-                    firefoxOptions.addArguments("--headless");
-                }
-                driver = new FirefoxDriver(firefoxOptions);
-                break;
-
-            case CHROME:
-                ChromeOptions options = new ChromeOptions();
-
-                // Tắt các thông báo không cần thiết
-                options.addArguments("--disable-notifications");
-                options.addArguments("--disable-popup-blocking");
-                options.addArguments("--disable-translate");
-                options.addArguments("--disable-extensions");
-
-                // Tối ưu cho screenshot
-                options.addArguments("--no-sandbox");
-                options.addArguments("--disable-dev-shm-usage");
-                options.addArguments("--disable-gpu");
-
-                // Set window size lớn để tránh scroll bar
-                options.addArguments("--start-maximized");
-
-                // Enable DevTools cho CDP commands
-                options.setExperimentalOption("useAutomationExtension", false);
-                options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
-                // ChromeOptions chromeOptions = new ChromeOptions();
-                if (headless) {
-                    // Headless mode
-                    options.addArguments("--headless=new"); // Selenium 4 new headless mode
-                    options.addArguments("--no-sandbox");
-                    options.addArguments("--disable-dev-shm-usage");
-                    options.addArguments("--disable-gpu");
-
-                    // Set large viewport for full page
-                    options.addArguments("--force-device-scale-factor=1");
-                }
-                driver = new ChromeDriver(options);
-                break;
-
-            case EDGE:
-                EdgeOptions edgeOptions = new EdgeOptions();
-                if (headless) {
-                    edgeOptions.addArguments("--headless=new");
-                    edgeOptions.addArguments("--disable-gpu");
-                }
-                driver = new EdgeDriver(edgeOptions);
-                break;
-
-            default:
-                throw new RuntimeException("Browser name is not valid");
-        }
-
-        driver.get(url);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        driver.manage().window().maximize();
-        return driver;
-    }
-
-    protected WebDriver getRemoteWebdriver(String browserName, String url, String osName, String ipAddress, String portNumber, boolean headless) {
-        BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
-        Platform platform;
-        Capabilities capability = null;
-
-        if (osName.toLowerCase().contains("windows")) {
-            platform = Platform.WINDOWS;
-        } else {
-            platform = Platform.MAC;
-        }
-
-        switch (browserList) {
-            case FIREFOX:
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                if (headless) {
-                    firefoxOptions.addArguments("--headless");
-                }
-                firefoxOptions.setCapability(CapabilityType.PLATFORM_NAME, platform);
-                capability = firefoxOptions;
-                break;
-
-            case CHROME:
-                ChromeOptions chromeOptions = new ChromeOptions();
-                if (headless) {
-                    chromeOptions.addArguments("--headless=new");
-                    chromeOptions.addArguments("--disable-gpu");
-                }
-                chromeOptions.setCapability(CapabilityType.PLATFORM_NAME, platform);
-                capability = chromeOptions;
-                break;
-
-            case EDGE:
-                EdgeOptions edgeOptions = new EdgeOptions();
-                if (headless) {
-                    edgeOptions.addArguments("--headless=new");
-                    edgeOptions.addArguments("--disable-gpu");
-                }
-                edgeOptions.setCapability(CapabilityType.PLATFORM_NAME, platform);
-                capability = edgeOptions;
-                break;
-
-            case SAFARI:
-                SafariOptions safariOptions = new SafariOptions();
-                safariOptions.setCapability(CapabilityType.PLATFORM_NAME, platform);
-                capability = safariOptions;
-                break;
-
-            default:
-                throw new RuntimeException("Browser name is not valid");
-        }
-
-        try {
-            driver = new RemoteWebDriver(new URL(String.format("http://%s:%s/wd/hub", ipAddress, portNumber)), capability);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        driver.get(url);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT));
-        return driver;
     }
 }

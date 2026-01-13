@@ -92,9 +92,9 @@ src
 
 ---
 
-## 5. Driver Configuration
+## 4. Driver Configuration
 
-### 5.1 DriverFactory
+### 4.1 DriverFactory
 
 ```java
 public class DriverFactory {
