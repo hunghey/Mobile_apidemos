@@ -1,8 +1,8 @@
-package pageObjects;
+package pageObjects.ApiDemoApp;
 
 import commons.BasePage;
 import io.appium.java_client.android.AndroidDriver;
-import pageUIs.HomePageUI;
+import pageUIs.ApiDemoApp.HomePageUI;
 
 public class HomePage extends BasePage {
 

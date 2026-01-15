@@ -1,4 +1,4 @@
-package pageUIs;
+package pageUIs.ApiDemoApp;
 
 public class HomePageUI {
     public static final String HOMEPAGE_TITLE = "xpath=//android.widget.TextView[@text='API Demos']";

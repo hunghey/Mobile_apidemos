@@ -1,10 +1,8 @@
-package pageObjects;
+package pageObjects.ApiDemoApp;
 
 import commons.BasePage;
-import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-import pageUIs.AlertPageUI;
-import pageUIs.HomePageUI;
+import pageUIs.ApiDemoApp.AlertPageUI;
 
 public class AppPage extends BasePage {
 

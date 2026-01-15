@@ -4,8 +4,8 @@ import core.DriverFactory;
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pageObjects.AlertDetailsPage;
-import pageObjects.HomePage;
+import pageObjects.ApiDemoApp.AlertDetailsPage;
+import pageObjects.ApiDemoApp.HomePage;
 
 import java.util.List;
 

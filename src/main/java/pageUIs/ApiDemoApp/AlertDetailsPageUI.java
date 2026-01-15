@@ -1,4 +1,4 @@
-package pageUIs;
+package pageUIs.ApiDemoApp;
 
 public class AlertDetailsPageUI {
     //AlertDialogUI
@@ -6,6 +6,7 @@ public class AlertDetailsPageUI {
     public static final String LIST_DIALOG = "ACCESSIBILITYID=List dialog";
     public static final String HEADER_LIST_ALERT = "ID=android:id/alertTitle";
     public static final String COMMAND_ITEMS= "XPATH=//android.widget.TextView[@resource-id='android:id/text1']";
+    public static final String SINGLE_CHOICE= "XPATH=//android.widget.CheckedTextView[@text='Map']";
 
 
     public static final String MESSAGE = "ID=android:id/message";

@@ -1,10 +1,10 @@
-package pageObjects;
+package pageObjects.ApiDemoApp;
 
 import commons.BasePage;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import pageUIs.AlertDetailsPageUI;
+import pageUIs.ApiDemoApp.AlertDetailsPageUI;
 
 import java.util.List;
 
@@ -61,5 +61,11 @@ public class AlertDetailsPage extends BasePage {
 
             pressBack();
 
+    }
+
+    public void checkSinglechoice(){
+        boolean isChecked = Boolean.parseBoolean(getElementAttribute(AlertDetailsPageUI.SINGLE_CHOICE,"checked"));
+        if(isChecked)
+            clickToElement(AlertDetailsPageUI.OK_BTN);
     }
 }
