@@ -13,12 +13,13 @@ public class DriverFactory {
     public static AndroidDriver initDriver() {
         try {
 //            caps.setCapability("app", System.getProperty("user.dir") + "/src/main/resources/apps/ApiDemos.apk");
-
             UiAutomator2Options options = new UiAutomator2Options()
                     .setDeviceName("emulator-5554")
                     .setAutomationName("UiAutomator2")
-                    .setAppPackage("io.appium.android.apis")
-                    .setAppActivity(".ApiDemos")
+//                    .setAppPackage("io.appium.android.apis")
+//                    .setAppActivity(".ApiDemos")
+                    .setAppPackage("com.swaglabsmobileapp")
+                    .setAppActivity(".MainActivity")
                     .setNoReset(true)
                     .setNewCommandTimeout(Duration.ofSeconds(300))
                     .setUiautomator2ServerLaunchTimeout(Duration.ofSeconds(120))

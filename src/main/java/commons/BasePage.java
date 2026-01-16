@@ -189,8 +189,11 @@ public class BasePage {
     }
 
     protected boolean isElementDisplayed(String locator) {
-        waitForElementVisible(locator);
-        return getElement(locator).isDisplayed();
+        try {
+            return driver.findElement(getByLocator(locator)).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     protected boolean isElementDisplayed(String locator, String restParameter) {
@@ -265,6 +268,20 @@ public class BasePage {
         return (boolean) ((JavascriptExecutor) driver).executeScript("return arguments[0].complete " +
                         "&& typeof arguments[0].naturalWidth != 'undefined' && arguments[0].naturalWidth > 0",
                 getElement(locator));
+    }
+
+    // ===== INPUT =====
+
+    protected void clearText(String locator) {
+        waitForElementVisible(locator);
+        getElement(locator).clear();
+    }
+
+    protected void inputText(String locator, String text) {
+        waitForElementVisible(locator);
+        WebElement el = getElement(locator);
+        el.clear();
+        el.sendKeys(text);
     }
 
 }
